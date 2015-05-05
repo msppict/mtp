@@ -1,5 +1,4 @@
-The files which can operate the Vector Control Daemon are uploaded here.
-All functions are in sepearte files.
+Vehicle.c file has vehicle model which takes inputs from testbench(user) and motor.c module. The output of vehicle.c is given to control.c (PI controller) which tunes the control speed according to the user requirement. The control.c module gives required speed as the output to the vector_control_daemon.
 
 Issues::
 Sort out Makefile .. 
