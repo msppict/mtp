@@ -77,7 +77,8 @@ while(1)
 	
         // remember the error for the next time around.
         prev_error = error;             
-            
+        write_float32("out_data",output);
+//        write_float32("out_data",id_err);
 
 }
 }	
