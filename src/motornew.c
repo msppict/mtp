@@ -390,7 +390,7 @@ k1_1 = 0, k1_2 = 0,
 		o2_3 = fpadd32f(o2_1,o2_2);
 		o2_4 = fpmul32f(cont,o2_3);
 		o2_5 = fpsub32f(o2_4,load_torque);
-		o2 = fdiv32(o2_5,inertia);
+		o2 = fdiv32f(o2_5,inertia);
 
 
 //		k3 = -gamma*((*iq_prev) + delta/2*k2) - omega*((*id_prev)+delta/2*l2) + alpha*beta*((*flq_prev)+delta/2*m2) - beta*((*spd_prev)+delta/2*o2)*((*fld_prev)+delta/2*n2) + (vq)/sigma;
@@ -531,7 +531,7 @@ k1_1 = 0, k1_2 = 0,
 		o3_3 = fpadd32f(o3_1,o3_2);
 		o3_4 = fpmul32f(cont,o3_3);
 		o3_5 = fpsub32f(o3_4,load_torque);
-		o3 = fdiv32(o3_5,inertia);
+		o3 = fdiv32f(o3_5,inertia);
 
 
 //		k4 = -gamma*((*iq_prev) + delta*k3) - omega*((*id_prev)+delta*l3) + alpha*beta*((*flq_prev)+delta*m3) - beta*((*spd_prev)+delta*o3)*((*fld_prev)+delta*n3) + (vq)/sigma;
@@ -644,7 +644,7 @@ k1_1 = 0, k1_2 = 0,
 		o4_3 = fpadd32f(o4_1,o4_2);
 		o4_4 = fpmul32f(cont,o4_3);
 		o4_5 = fpsub32f(o4_4,load_torque);
-		o4 = fdiv32(o4_5,inertia);
+		o4 = fdiv32f(o4_5,inertia);
 
 
 
@@ -658,7 +658,7 @@ k1_1 = 0, k1_2 = 0,
 		k32 = fpmul32f(k23,2);
 		kadd1 = fpadd32f(k32,k1);
 		kadd2 = fpadd32f(kadd1,k4);
-		kadd = fdiv32(kadd2,6);
+		kadd = fdiv32f(kadd2,6);
 		kdel = fpmul32f(delta,kadd);
 		iq = fpadd32f(iq_prev,kdel);
 //		iq = iq_prev + delta*(k1 + 2*k2 + 2*k3 + k4)/6;
@@ -672,7 +672,7 @@ k1_1 = 0, k1_2 = 0,
 		l32 = fpmul32f(l23,2);
 		ladd1 = fpadd32f(l32,l1);
 		ladd2 = fpadd32f(ladd1,l4);
-		ladd = fdiv32(ladd2,6);
+		ladd = fdiv32f(ladd2,6);
 		ldel = fpmul32f(delta,ladd);
 		id = fpadd32f(id_prev,ldel);
 
@@ -683,7 +683,7 @@ k1_1 = 0, k1_2 = 0,
 		m32 = fpmul32f(m23,2);
 		madd1 = fpadd32f(m32,m1);
 		madd2 = fpadd32f(madd1,m4);
-		madd = fdiv32(madd2,6);
+		madd = fdiv32f(madd2,6);
 		mdel = fpmul32f(delta,madd);
 		flq = fpadd32f(flq_prev,mdel);
 
@@ -698,7 +698,7 @@ k1_1 = 0, k1_2 = 0,
 		n32 = fpmul32f(n23,2);
 		nadd1 = fpadd32f(n32,n1);
 		nadd2 = fpadd32f(nadd1,n4);
-		nadd = fdiv32(nadd2,6);
+		nadd = fdiv32f(nadd2,6);
 		ndel = fpmul32f(delta,nadd);
 		fld = fpadd32f(fld_prev,ndel);
 
@@ -709,7 +709,7 @@ k1_1 = 0, k1_2 = 0,
 		o32 = fpmul32f(o23,2);
 		oadd1 = fpadd32f(o32,o1);
 		oadd2 = fpadd32f(oadd1,o4);
-		oadd = fdiv32(oadd2,6);
+		oadd = fdiv32f(oadd2,6);
 		odel = fpmul32f(delta,oadd);
 		spd = fpadd32f(spd_prev,odel);
 
@@ -729,9 +729,9 @@ k1_1 = 0, k1_2 = 0,
 //		omega_r = (lm * (*iq))/((lr/rr)*f_rotor);
 //		omega_r = (lm * iq)/((lr/rr)*f_rotor);
 		omega_r1 = fpmul32f(lm,iq);
-		omega_r2 = fdiv32(lr,rr);
+		omega_r2 = fdiv32f(lr,rr);
 		omega_r3 = fpmul32f(omega_r2,f_rotor);
-		omega_r = fdiv32(omega_r1,omega_r3);
+		omega_r = fdiv32f(omega_r1,omega_r3);
 		
 		if (iq == 0)
 			omega_r = 0;

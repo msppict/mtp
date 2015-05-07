@@ -3,8 +3,8 @@
 #include <signal.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include "math.h"
-
+//#include "math.h"
+#include "prog.h"
 
 
 //void battery(double *Vload_prev, double *Vload, double *Iload_prev, double *Iload, double *temp, double *time, double *Vb_prev, double *Vc_prev, double *Vb, double *Vc)
@@ -50,12 +50,6 @@ void battery()
 	
 
    float delta = 0, delta_2 = 0;
-   char buffer[BUFSIZ];
-
-
-//	char filename_Vb[] 	= "/home/mayur/RnDproject/ahirmaster/Documents/Tutorials/MTP/battery/src/Vb.m";
-//   	char filename_soc[] 	= "/home/mayur/RnDproject/ahirmaster/Documents/Tutorials/MTP/battery/src/soc.m";
-//	FILE *fp_Vb = NULL;
 
 	// alpha = 1/(Cb*(Re+Rc));
 	alpha_temp = fpadd32f(Re,Rc);
@@ -67,48 +61,10 @@ void battery()
 	beta = fdiv32(1,beta_temp1);
 	
 //    fprintf(stderr,"alpha = %20.18f, beta = %20.18f \n",alpha, beta);	
-/*     if ( 0.0 == *time ) {  
-
-     *Vb_prev = 0.0;
-     *Vc_prev = 0.0;
-     *Vb = 0.0;
-     *Vc = 0.0;
-     *Iload_prev = 0.0;
-     *Iload = 0.0;  
-     *Vload_prev = 0.0;
-     *Vload = 0.0;
-	*time = *time + delta;
-
-   	
-     	fp_Vb = fopen(filename_Vb, "w"); 
-	if(fp_Vb == NULL) {
-		printf("Failed to open file for writing\n");
-	}
-	fputs("Vb, Here it is! Herr Hitler! = [ ", fp_Vb); 
-	fclose(fp_Vb);
-
-/*
-   	char filename_Vb[] 	= "/home/mayur/RnDproject/ahirmaster/Documents/Tutorials/MTP/battery/src/Vb.m";
-   	char filename_soc[] 	= "/home/mayur/RnDproject/ahirmaster/Documents/Tutorials/MTP/battery/src/soc.m";
-	FILE *fp_Vb = NULL;
-     	fp_Vb = fopen(filename_Vb, "w"); 
-	if(fp_Vb == NULL) {
-		printf("Failed to open file for writing\n");
-	}
-	fputs("Vb, Here it is! Herr Hitler! = [ ", fp_Vb); 
-	fclose(fp_Vb);
-
-	fprintf(stderr,"Initialization done!");
-	
-     }
-
-     else {
-       
-*/		
 
 while(1)
 {
- //    delta = time_period;
+     delta = time_period;
 
 //  Vb' = -alpha(Vb - Vc + RcIload)
 //  Vc' = -beta(-Vb +Vc + RcIload)
@@ -264,54 +220,14 @@ while(1)
     
      time = time + delta;
      SOC = Cb*(Vb) + Cc*(Vc);
-     printf("\nIn battery module,\n SOC = %20.18f, \t Vload =%20.18f, \n Vb = %20.18f, Vc = %20.18f ",SOC,Vload,Vb,Vc); 
 
-     fp_Vb = fopen(filename_Vb, "a"); // open file for appending !!! 
-		fprintf(fp_Vb," %20.18f ",&Vb);
-		fclose(fp_Vb);    
-
+	//Out puts from the module -- Pipes to other modules
+	// Vload
+	// I load
+	// SOC
      }
      
 
 }
 
-void main()
-{
-printf("\nHello world!\n");
-int i,j;
-double Vload_prev =54 , Vload = 55, Iload_prev = -3, Iload = -4444631.1, temp = 25, time = 1, Vb_prev = 5, Vc_prev = 5, Vb=5, Vc=4;
-/*
-   	char filename_Vb[] 	= "/home/mayur/RnDproject/ahirmaster/Documents/Tutorials/MTP/battery/src/Vb.m";
-   	char filename_soc[] 	= "/home/mayur/RnDproject/ahirmaster/Documents/Tutorials/MTP/battery/src/soc.m";
-	FILE *fp_Vb = NULL;
-     	fp_Vb = fopen(filename_Vb, "w"); 
-	if(fp_Vb == NULL) {
-		printf("Failed to open file for writing\n");
-	}
-	fputs("Vb, Here it is! Herr Hitler! = [ ", fp_Vb); 
-	fclose(fp_Vb);
-*/
-for(j=0;j<100;j++)
-{
-for(i=0;i<200;i++)
-{
-//printf("\n In Main..hi!\n");
-battery(&Vload_prev, &Vload, &Iload_prev, &Iload, &temp, &time, &Vb_prev, &Vc_prev, &Vb, &Vc);
 
-/*     fp_Vb = fopen(filename_Vb, "a"); // open file for appending !!! 
-		fprintf(fp_Vb," %20.18lf ",&Vb);
-		fclose(fp_Vb);
-*/
-}
-printf("\n Value after %dth iteration \n Iload = %20.18f",j*i,Iload);
-
-
-}
-printf("\nOver!\n");
-    
-/*
-fp_Vb = fopen(filename_Vb, "a"); // open file for appending !!! 
-	fprintf(fp_Vb," ]; ");
-	fclose(fp_Vb);
-*/
-}
